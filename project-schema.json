@@ -1,0 +1,19 @@
+{
+  "title": "KocokTim",
+  "description": "Acak dan bagi daftar peserta menjadi beberapa kelompok dengan cepat, adil, dan tersimpan otomatis di browser.",
+  "category": "Tools",
+  "tags": [
+    "Random",
+    "Grouping",
+    "Team",
+    "Shuffle",
+    "Fair",
+    "LocalStorage",
+    "Fisher-Yates",
+    "JavaScript"
+  ],
+  "icon": "assets/logo.jpg",
+  "pinned": true,
+  "url": "https://www.kocok-tim.soudayonee.tech/",
+  "listed": true
+}

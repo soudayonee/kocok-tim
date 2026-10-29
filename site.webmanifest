@@ -1,0 +1,20 @@
+{
+    "name": "Kocok Tim",
+    "short_name": "Kocok Tim",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#4F46E5",
+    "background_color": "#F8FAFC",
+    "icons": [
+        {
+            "src": "/assets/icon-152.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}
