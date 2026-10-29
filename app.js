@@ -66,8 +66,6 @@
 
   var dom = {
     participantsTextarea: document.getElementById("participantsTextarea"),
-    quickPersonInput: document.getElementById("quickPersonInput"),
-    btnAddPerson: document.getElementById("btnAddPerson"),
     participantCountLabel: document.getElementById("participantCountLabel"),
     btnLoadSample: document.getElementById("btnLoadSample"),
     btnDedupe: document.getElementById("btnDedupe"),
@@ -87,6 +85,7 @@
     pickLeaderCheckbox: document.getElementById("pickLeaderCheckbox"),
     randomizerForm: document.getElementById("randomizerForm"),
     resultsSection: document.getElementById("resultsSection"),
+    resultsActions: document.querySelector(".results-actions"),
     btnReshuffleOnly: document.getElementById("btnReshuffleOnly"),
     btnShuffleInsideGroups: document.getElementById("btnShuffleInsideGroups"),
     btnCopyResult: document.getElementById("btnCopyResult"),
@@ -176,13 +175,9 @@
 
   function getSampleParticipantsForCurrentSettings() {
     var splitValue = Math.max(1, parseInt(state.splitValue, 10) || 1);
-    var sampleCount = Math.min(
-      SAMPLE_PARTICIPANTS.length,
-      splitValue * 4,
-    );
+    var sampleCount = Math.min(SAMPLE_PARTICIPANTS.length, splitValue * 4);
 
-    sampleCount =
-      Math.floor(sampleCount / splitValue) * splitValue;
+    sampleCount = Math.floor(sampleCount / splitValue) * splitValue;
 
     if (sampleCount === 0) {
       sampleCount = Math.min(SAMPLE_PARTICIPANTS.length, splitValue);
@@ -322,6 +317,7 @@
   function showToast(message) {
     var toast = document.createElement("div");
     toast.className = "toast";
+    toast.setAttribute("role", "status");
     toast.textContent = message;
     dom.toastContainer.appendChild(toast);
     setTimeout(function () {
@@ -572,12 +568,12 @@
     var isGroupMode = state.mode === "groupCount";
     dom.tabByGroupCount.classList.toggle("active", isGroupMode);
     dom.tabByGroupCount.setAttribute(
-      "aria-selected",
+      "aria-pressed",
       isGroupMode ? "true" : "false",
     );
     dom.tabByMemberCount.classList.toggle("active", !isGroupMode);
     dom.tabByMemberCount.setAttribute(
-      "aria-selected",
+      "aria-pressed",
       !isGroupMode ? "true" : "false",
     );
 
@@ -606,6 +602,10 @@
         : '<svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
     dom.liveMathTitle.textContent = dist.title;
     dom.liveMathDesc.textContent = dist.message;
+  }
+
+  function getGroupColumnCount() {
+    return window.innerWidth <= 768 ? 1 : window.innerWidth <= 1024 ? 2 : 3;
   }
 
   function renderGroupsOutput() {
@@ -646,6 +646,15 @@
     var minSize = Math.min.apply(null, sizes);
     var hasDiff = maxSize !== minSize;
 
+    var columnCount = getGroupColumnCount();
+    var groupColumns = [];
+    for (var columnIndex = 0; columnIndex < columnCount; columnIndex++) {
+      var column = document.createElement("div");
+      column.className = "group-column";
+      groupColumns.push(column);
+      dom.groupsOutputContainer.appendChild(column);
+    }
+
     state.groups.forEach(function (group, gIndex) {
       var card = document.createElement("article");
       var isSmaller = hasDiff && group.members.length === minSize;
@@ -654,6 +663,12 @@
 
       var head = document.createElement("header");
       head.className = "group-card-head";
+
+      var headerWrapper = document.createElement("div");
+      headerWrapper.className = "group-card-head-wrapper";
+      headerWrapper.innerHTML =
+        '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg>';
+      head.appendChild(headerWrapper);
 
       var titleInput = document.createElement("input");
       titleInput.type = "text";
@@ -667,12 +682,7 @@
         saveStateToStorage();
       });
 
-      var badge = document.createElement("span");
-      badge.className = "member-count-tag";
-      badge.textContent = group.members.length + " orang";
-
-      head.appendChild(titleInput);
-      head.appendChild(badge);
+      headerWrapper.appendChild(titleInput);
 
       var list = document.createElement("ol");
       list.className = "member-list";
@@ -680,6 +690,10 @@
       group.members.forEach(function (member, mIndex) {
         var li = document.createElement("li");
         li.className = "member-row";
+
+        if (state.pickLeader && mIndex === (group.leaderIndex || 0)) {
+          li.classList.add("is-leader");
+        }
 
         var info = document.createElement("div");
         info.className = "member-info";
@@ -693,26 +707,66 @@
         nameSpan.textContent = member;
 
         info.appendChild(idxSpan);
-        info.appendChild(nameSpan);
-        li.appendChild(info);
-
         if (state.pickLeader && mIndex === (group.leaderIndex || 0)) {
           var lead = document.createElement("span");
           lead.className = "leader-pill";
-          lead.style.display = "inline-flex";
-          lead.style.alignItems = "center";
-          lead.style.gap = "4px";
+          lead.setAttribute("aria-label", "Ketua");
+          lead.title = "Ketua";
           lead.innerHTML =
-            '<svg class="icon-svg icon-svg-sm" style="width:12px;height:12px;" viewBox="0 0 24 24" aria-hidden="true"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg><span>Ketua</span>';
-          li.appendChild(lead);
+            '<svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg>';
+          info.appendChild(lead);
         }
+        info.appendChild(nameSpan);
+        li.appendChild(info);
 
         list.appendChild(li);
       });
 
+      var footer = document.createElement("footer");
+      footer.className = "group-card-footer";
+
+      var copyGroupBtn = document.createElement("button");
+      copyGroupBtn.innerHTML =
+        '<svg class="icon-svg icon-svg-md" viewBox="0 0 24 24" aria-hidden="true" style="stroke: currentColor; stroke-width: 2.5px; fill: none;"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>' +
+        '<span style="vertical-align: middle;">Salin Anggota</span>';
+      copyGroupBtn.type = "button";
+      copyGroupBtn.className = "btn btn-lg btn-full";
+      copyGroupBtn.style.fontWeight = "600";
+      copyGroupBtn.style.padding = "14px 0";
+      copyGroupBtn.style.border = "none";
+      copyGroupBtn.style.borderRadius = "0 0 var(--radius-md) var(--radius-md)";
+      copyGroupBtn.style.borderTop = "1px solid var(--border-color)";
+      copyGroupBtn.addEventListener("click", function () {
+        var lines = [group.name + " (" + group.members.length + " orang):"];
+        group.members.forEach(function (m, idx) {
+          var isLead = state.pickLeader && idx === (group.leaderIndex || 0);
+          lines.push(idx + 1 + ". " + m + (isLead ? " (Ketua)" : ""));
+        });
+        var text = lines.join("\n").trim();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              showToast(
+                "Anggota " + group.name + " berhasil disalin ke clipboard.",
+              );
+            })
+            .catch(function () {
+              showToast("Gagal menyalin ke clipboard.");
+            });
+        } else {
+          showToast("Fitur clipboard tidak didukung di browser ini.");
+        }
+      });
+      footer.appendChild(copyGroupBtn);
+
       card.appendChild(head);
       card.appendChild(list);
-      dom.groupsOutputContainer.appendChild(card);
+      card.appendChild(footer);
+      var shortestColumn = groupColumns.reduce(function (shortest, column) {
+        return column.offsetHeight < shortest.offsetHeight ? column : shortest;
+      }, groupColumns[0]);
+      shortestColumn.appendChild(card);
     });
   }
 
@@ -741,7 +795,13 @@
       top.style.color = "var(--text-muted)";
       top.style.fontSize = "0.73rem";
       top.innerHTML =
-        "<span>#" + (count - idx) + "</span><time>" + item.time + "</time>";
+        "<span>#" +
+        (count - idx) +
+        `</span><div style="display: flex; align-items: center; gap: 4px;"><svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><time datetime="` +
+        item.time +
+        `">` +
+        item.time +
+        "</time></div>";
 
       var label = document.createElement("div");
       label.style.fontWeight = "600";
@@ -809,18 +869,6 @@
     renderHistory();
   }
 
-  function addSinglePerson() {
-    var val = dom.quickPersonInput.value.trim();
-    if (!val) return;
-    var current = parseParticipants(state.participantsText);
-    current.push(val);
-    state.participantsText = current.join("\n");
-    dom.participantsTextarea.value = state.participantsText;
-    dom.quickPersonInput.value = "";
-    saveStateToStorage();
-    renderConfigAndMath();
-  }
-
   function copyGroupsToClipboard() {
     if (!state.groups || state.groups.length === 0) return;
     var lines = ["HASIL PEMBAGIAN KELOMPOK"];
@@ -871,29 +919,41 @@
 
   function exportGroupsToCsv() {
     if (!state.groups || state.groups.length === 0) return;
-    var rows = [["Kelompok", "No", "Nama Anggota", "Peran"]];
+    var escapeCsv = function (value) {
+      return '"' + String(value).replace(/"/g, '""') + '"';
+    };
+    var rows = [
+      ["KocokTim - Hasil Pembagian Kelompok"],
+      ["Waktu Pengacakan", state.lastUpdated || "-"],
+      ["Total Peserta", parseParticipants(state.participantsText).length],
+      ["Total Kelompok", state.groups.length],
+      [],
+      ["Kelompok", "Nomor", "Nama Anggota", "Peran"],
+    ];
     state.groups.forEach(function (grp) {
       grp.members.forEach(function (m, idx) {
         var role =
           state.pickLeader && idx === grp.leaderIndex ? "Ketua" : "Anggota";
-        rows.push([
-          '"' + grp.name.replace(/"/g, '""') + '"',
-          String(idx + 1),
-          '"' + m.replace(/"/g, '""') + '"',
-          role,
-        ]);
+        rows.push([grp.name, idx + 1, m, role]);
       });
     });
     var csv = rows
       .map(function (r) {
-        return r.join(",");
+        return r.map(escapeCsv).join(",");
       })
       .join("\n");
-    var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    var blob = new Blob(["\uFEFF" + csv], {
+      type: "text/csv;charset=utf-8;",
+    });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
-    a.download = "hasil-kelompok.csv";
+    a.target = "_blank";
+    const datePart = new Date()
+      .toLocaleDateString("id-ID")
+      .replace(/[^\d]/g, "-");
+    const randomId = crypto.randomUUID().split("-")[0];
+    a.download = `kocok-tim-${randomId}-${datePart}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -910,14 +970,6 @@
     if (e.ctrlKey && e.key === "Enter") {
       e.preventDefault();
       requestGenerateGroups(false);
-    }
-  });
-
-  dom.btnAddPerson.addEventListener("click", addSinglePerson);
-  dom.quickPersonInput.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addSinglePerson();
     }
   });
 
@@ -1132,6 +1184,34 @@
 
   dom.btnCopyResult.addEventListener("click", copyGroupsToClipboard);
   dom.btnExportCsv.addEventListener("click", exportGroupsToCsv);
+  [
+    dom.btnReshuffleOnly,
+    dom.btnShuffleInsideGroups,
+    dom.btnCopyResult,
+    dom.btnExportCsv,
+  ].forEach(function (button) {
+    button.addEventListener("click", function () {
+      dom.resultsActions.removeAttribute("open");
+    });
+  });
+  document.addEventListener(
+    "pointerdown",
+    function (e) {
+      if (
+        dom.resultsActions.hasAttribute("open") &&
+        !dom.resultsActions.contains(e.target)
+      ) {
+        dom.resultsActions.removeAttribute("open");
+      }
+    },
+    true,
+  );
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && dom.resultsActions.open) {
+      dom.resultsActions.removeAttribute("open");
+      dom.resultsActions.querySelector("summary").focus();
+    }
+  });
 
   dom.btnClearHistory.addEventListener("click", function () {
     if (!state.history || state.history.length === 0) {
@@ -1162,6 +1242,19 @@
     state.theme = state.theme === "dark" ? "light" : "dark";
     saveStateToStorage();
     applyTheme();
+  });
+
+  var masonryResizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(masonryResizeTimer);
+    masonryResizeTimer = setTimeout(function () {
+      if (
+        state.groups.length > 0 &&
+        dom.groupsOutputContainer.children.length !== getGroupColumnCount()
+      ) {
+        renderGroupsOutput();
+      }
+    }, 150);
   });
 
   var loaded = loadStateFromStorage();

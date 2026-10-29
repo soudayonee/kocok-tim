@@ -13,14 +13,31 @@
       content="pengacak kelompok, pembagi kelompok, team randomizer, group generator, acak tim otomatis, pembagi tim, acak anggota, pembagi anggota, acak daftar nama, pembagi daftar nama, acak peserta, pembagi peserta, soudayonee, kocoktim, kocok tim, kocok-tim, kocok-tim.soudayonee.tech"
     />
     <meta name="author" content="Soudayonee" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
     <meta name="theme-color" content="#4F46E5" />
     <meta name="color-scheme" content="light dark" />
     <link rel="canonical" href="https://www.kocok-tim.soudayonee.tech/" />
     <link rel="icon" type="image/x-icon" sizes="any" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/apple-icon.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/assets/favicon-16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/favicon-32.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/apple-icon.png"
+    />
     <link rel="manifest" href="/site.webmanifest" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />
@@ -32,17 +49,24 @@
       property="og:description"
       content="Acak dan bagi daftar peserta menjadi beberapa kelompok dengan cepat, adil, dan tersimpan otomatis di browser."
     />
+    <meta property="og:url" content="https://www.kocok-tim.soudayonee.tech/" />
     <meta
-      property="og:url"
-      content="https://www.kocok-tim.soudayonee.tech/"
+      property="og:image"
+      content="https://www.kocok-tim.soudayonee.tech/assets/og-image.jpg"
     />
-    <meta property="og:image" content="https://www.kocok-tim.soudayonee.tech/assets/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Kocok Tim dengan pengacak dan pembagi kelompok otomatis" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="2752" />
+    <meta property="og:image:height" content="1536" />
+    <meta
+      property="og:image:alt"
+      content="Kocok Tim dengan pengacak dan pembagi kelompok otomatis"
+    />
     <meta property="og:site_name" content="KocokTim" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://www.kocok-tim.soudayonee.tech/assets/og-image.png" />
+    <meta
+      name="twitter:image"
+      content="https://www.kocok-tim.soudayonee.tech/assets/og-image.jpg"
+    />
     <meta
       name="twitter:title"
       content="KocokTim — Pembagi & Pengacak Kelompok Otomatis"
@@ -78,45 +102,31 @@
   <body>
     <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
 
-    <header class="navbar">
-      <div class="navbar-inner">
-        <a href="#main-content" class="brand">
-          <img src="/assets/logo.jpg" alt="Logo KocokTim" width="32" height="32" style="border-radius: 50%; border: 2px solid var(--border-color);" />
+    <main id="main-content" class="container">
+      <header class="site-header">
+        <a
+          class="brand"
+          href="#main-content"
+          aria-label="KocokTim, kembali ke awal"
+        >
+          <img src="/assets/logo.png" alt="Logo KocokTim" width="32" height="32" />
           <span class="brand-name">KocokTim</span>
         </a>
-
-        <div class="nav-right">
-          <span
-            class="sync-badge"
-            id="storageStatusText"
-            role="status"
-            aria-live="polite"
-          >
-            <span class="sync-dot" aria-hidden="true"></span>
-            Tersimpan Otomatis
+        <button
+          type="button"
+          class="btn btn-sm"
+          id="btnToggleTheme"
+          aria-label="Ganti tampilan terang atau gelap"
+        >
+          <span id="themeIcon" aria-hidden="true">
+            <svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24">
+              <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
+            </svg>
           </span>
-          <button
-            type="button"
-            class="btn btn-sm"
-            id="btnToggleTheme"
-            aria-label="Ganti tampilan terang atau gelap"
-          >
-            <span
-              id="themeIcon"
-              aria-hidden="true"
-              style="display: inline-flex; align-items: center"
-            >
-              <svg class="icon-svg icon-svg-sm" viewBox="0 0 24 24">
-                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
-              </svg>
-            </span>
-            <span id="themeLabel">Gelap</span>
-          </button>
-        </div>
-      </div>
-    </header>
+          <span id="themeLabel">Gelap</span>
+        </button>
+      </header>
 
-    <main id="main-content" class="container">
       <header class="page-intro">
         <h1>Pengacak &amp; Pembagi Kelompok</h1>
         <p>
@@ -150,115 +160,85 @@
               >
             </div>
 
-            <div class="quick-input-group">
-              <input
-                type="text"
-                id="quickPersonInput"
-                class="input-control"
-                placeholder="Tambah satu nama lalu tekan Enter..."
-                aria-label="Tambah satu nama peserta"
-              />
-              <button type="button" class="btn" id="btnAddPerson">
-                <svg
-                  class="icon-svg icon-svg-sm"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <line x1="19" x2="19" y1="8" y2="14" />
-                  <line x1="22" x2="16" y1="11" y2="11" />
-                </svg>
-                <span>Tambah</span>
-              </button>
-            </div>
-
             <textarea
               id="participantsTextarea"
               class="textarea-control"
+              aria-describedby="participants-help"
               placeholder="Tulis atau tempel daftar nama di sini (pisahkan dengan baris baru atau koma)..."
             ></textarea>
 
-            <div class="helper-bar">
-              <span>Pisahkan nama dengan Enter atau koma</span>
-              <div class="helper-links">
-                <button
-                  type="button"
-                  class="text-link-btn"
-                  id="btnLoadSample"
-                  style="display: inline-flex; align-items: center; gap: 4px"
+            <p class="input-helper" id="participants-help">
+              Satu nama per baris atau pisahkan dengan koma. <br /> Tekan Ctrl + Enter
+              untuk mengacak.
+            </p>
+            <div class="helper-links" aria-label="Aksi daftar peserta">
+              <button
+                type="button"
+                class="btn"
+                id="btnLoadSample"
+                style="display: inline-flex; align-items: center"
+              >
+                <svg
+                  class="icon-svg icon-svg-md"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  <svg
-                    class="icon-svg icon-svg-sm"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
-                    />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" x2="8" y1="13" y2="13" />
-                    <line x1="16" x2="8" y1="17" y2="17" />
-                    <line x1="10" x2="8" y1="9" y2="9" />
-                  </svg>
-                  <span>Isi daftar contoh</span>
-                </button>
-                <button
-                  type="button"
-                  class="text-link-btn"
-                  id="btnDedupe"
-                  style="display: inline-flex; align-items: center; gap: 4px"
+                  <path
+                    d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+                  />
+                  <polyline points="14 2 14 8 20 8" />
+                  <line x1="16" x2="8" y1="13" y2="13" />
+                  <line x1="16" x2="8" y1="17" y2="17" />
+                  <line x1="10" x2="8" y1="9" y2="9" />
+                </svg>
+                <span>Isi daftar contoh</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning"
+                id="btnDedupe"
+                style="display: inline-flex; align-items: center"
+              >
+                <svg
+                  class="icon-svg icon-svg-md"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  <svg
-                    class="icon-svg icon-svg-sm"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 6h18" />
-                    <path d="M7 12h10" />
-                    <path d="M10 18h4" />
-                  </svg>
-                  <span>Hapus nama ganda</span>
-                </button>
-                <button
-                  type="button"
-                  class="text-link-btn"
-                  id="btnResetAll"
-                  style="display: inline-flex; align-items: center; gap: 4px"
+                  <path d="M3 6h18" />
+                  <path d="M7 12h10" />
+                  <path d="M10 18h4" />
+                </svg>
+                <span>Hapus nama ganda</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                id="btnResetAll"
+                style="display: inline-flex; align-items: center"
+              >
+                <svg
+                  class="icon-svg icon-svg-md"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
-                  <svg
-                    class="icon-svg icon-svg-sm"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M3 6h18" />
-                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-                  </svg>
-                  <span>Kosongkan</span>
-                </button>
-              </div>
+                  <path d="M3 6h18" />
+                  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+                  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+                </svg>
+                <span>Kosongkan</span>
+              </button>
             </div>
           </div>
 
           <div class="settings-column">
-            <div>
-              <span
-                class="field-label"
-                style="display: block; margin-bottom: 8px"
-                >Cara Pembagian</span
-              >
-              <div
-                class="segmented-control"
-                role="tablist"
-                aria-label="Metode pembagian"
-              >
+            <fieldset class="settings-group">
+              <legend class="sr-only">Metode pembagian kelompok</legend>
+              <div class="segmented-control" aria-label="Metode pembagian">
                 <button
                   type="button"
-                  role="tab"
                   id="tabByGroupCount"
                   class="segment-btn active"
-                  aria-selected="true"
+                  aria-pressed="true"
                   style="
                     display: inline-flex;
                     align-items: center;
@@ -280,10 +260,9 @@
                 </button>
                 <button
                   type="button"
-                  role="tab"
                   id="tabByMemberCount"
                   class="segment-btn"
-                  aria-selected="false"
+                  aria-pressed="false"
                   style="
                     display: inline-flex;
                     align-items: center;
@@ -304,7 +283,7 @@
                   <span>Anggota / Kelompok</span>
                 </button>
               </div>
-            </div>
+            </fieldset>
 
             <div class="number-picker-box">
               <div class="number-picker-info">
@@ -349,6 +328,7 @@
                   type="number"
                   id="splitNumberInput"
                   class="stepper-input"
+                  aria-describedby="splitNumberSubhint"
                   min="1"
                   max="100"
                   value="4"
@@ -428,7 +408,11 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary" id="btnGenerate">
+            <button
+              type="submit"
+              class="btn btn-primary btn-full"
+              id="btnGenerate"
+            >
               <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"
@@ -457,100 +441,126 @@
             <time id="lastShuffledTime" class="time-pill">Siap diacak</time>
           </div>
 
-          <div class="results-actions">
-            <button
-              type="button"
-              class="btn btn-sm"
-              id="btnReshuffleOnly"
-              title="Acak ulang seluruh peserta ke kelompok baru"
-            >
+          <details class="results-actions">
+            <summary class="action-menu-trigger">
+              <span>Pengaturan</span>
               <svg
-                class="icon-svg icon-svg-sm"
+                class="icon-svg icon-svg-sm action-menu-chevron"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
               >
-                <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-                <path d="M3 3v5h5" />
-                <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
-                <path d="M16 16h5v5" />
+                <polyline points="6 9 12 15 18 9" />
               </svg>
-              <span
-                style="
-                  position: absolute;
-                  width: 1px;
-                  height: 1px;
-                  overflow: hidden;
-                  clip: rect(0, 0, 0, 0);
-                "
-                >↻ </span
-              ><span>Acak Ulang Semua</span>
-            </button>
-            <button
-              type="button"
-              class="btn btn-sm"
-              id="btnShuffleInsideGroups"
-              title="Acak urutan anggota di dalam tiap kelompok"
-            >
-              <svg
-                class="icon-svg icon-svg-sm"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+            </summary>
+            <div class="action-menu" aria-label="Pengaturan pembagian">
+              <button
+                type="button"
+                class="btn btn-sm action-menu-item"
+                id="btnReshuffleOnly"
+                title="Acak ulang seluruh peserta ke kelompok baru"
               >
-                <path d="m21 16-4 4-4-4" />
-                <path d="M17 20V4" />
-                <path d="m3 8 4-4 4 4" />
-                <path d="M7 4v16" />
-              </svg>
-              <span
-                style="
-                  position: absolute;
-                  width: 1px;
-                  height: 1px;
-                  overflow: hidden;
-                  clip: rect(0, 0, 0, 0);
-                "
-                >⇅ </span
-              ><span>Acak Urutan Internal</span>
-            </button>
-            <button type="button" class="btn btn-sm" id="btnCopyResult">
-              <svg
-                class="icon-svg icon-svg-sm"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+                <svg
+                  class="icon-svg icon-svg-sm"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                  />
+                  <path d="M3 3v5h5" />
+                  <path
+                    d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"
+                  />
+                  <path d="M16 16h5v5" />
+                </svg>
+                <span
+                  style="
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                  "
+                  >↻ </span
+                ><span>Acak Ulang Semua</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm action-menu-item"
+                id="btnShuffleInsideGroups"
+                title="Acak urutan anggota di dalam tiap kelompok"
               >
-                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-                <path
-                  d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-                />
-              </svg>
-              <span>Salin Teks</span>
-            </button>
-            <button type="button" class="btn btn-sm" id="btnExportCsv">
-              <svg
-                class="icon-svg icon-svg-sm"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+                <svg
+                  class="icon-svg icon-svg-sm"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="m21 16-4 4-4-4" />
+                  <path d="M17 20V4" />
+                  <path d="m3 8 4-4 4 4" />
+                  <path d="M7 4v16" />
+                </svg>
+                <span
+                  style="
+                    position: absolute;
+                    width: 1px;
+                    height: 1px;
+                    overflow: hidden;
+                    clip: rect(0, 0, 0, 0);
+                  "
+                  >⇅ </span
+                ><span>Acak Urutan Internal</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm action-menu-item"
+                id="btnCopyResult"
               >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" x2="12" y1="15" y2="3" />
-              </svg>
-              <span>Unduh CSV</span>
-            </button>
-          </div>
+                <svg
+                  class="icon-svg icon-svg-sm"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                  <path
+                    d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                  />
+                </svg>
+                <span>Salin Teks</span>
+              </button>
+              <button
+                type="button"
+                class="btn btn-sm action-menu-item"
+                id="btnExportCsv"
+              >
+                <svg
+                  class="icon-svg icon-svg-sm"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" x2="12" y1="15" y2="3" />
+                </svg>
+                <span>Unduh CSV</span>
+              </button>
+            </div>
+          </details>
         </div>
 
         <div
           id="unevenNotificationBanner"
           class="uneven-result-notice"
           role="status"
+          aria-live="polite"
+          aria-atomic="true"
         >
-          <div>
+          <p>
             <strong id="unevenBannerTitle"
               >Distribusi Anggota Tidak Sama Rata:
             </strong>
             <span id="unevenBannerBody"></span>
-          </div>
+          </p>
           <button type="button" class="btn btn-sm" id="btnDismissUnevenBanner">
             Tutup
           </button>
@@ -572,28 +582,18 @@
               <polyline points="12 7 12 12 15 15" />
             </svg>
             <span
-              >Riwayat Undian Tersimpan (<span id="historyCountBadge">0</span
+              >Riwayat Pengacakan Tersimpan (<span id="historyCountBadge"
+                >0</span
               >)</span
             >
           </span>
-          <span
-            style="
-              font-size: 0.76rem;
-              color: var(--text-muted);
-              display: inline-flex;
-              align-items: center;
-              gap: 4px;
-            "
+          <svg
+            class="icon-svg icon-svg-sm"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
           >
-            <span>Klik untuk lihat / pulihkan</span>
-            <svg
-              class="icon-svg icon-svg-sm"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <polyline points="6 9 12 15 18 9" />
-            </svg>
-          </span>
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </summary>
         <h2
           id="history-heading"
@@ -605,7 +605,7 @@
             clip: rect(0, 0, 0, 0);
           "
         >
-          Riwayat Undian Tersimpan
+          Riwayat Pengacakan Tersimpan
         </h2>
         <div class="history-body">
           <div
@@ -621,7 +621,25 @@
               Disimpan otomatis di browser Anda (LocalStorage) sehingga aman
               meskipun halaman di-refresh.
             </p>
-            <button type="button" class="btn btn-sm" id="btnClearHistory">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              id="btnClearHistory"
+            >
+              <svg
+                class="icon-svg icon-svg-sm"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="m16 22-1-4" />
+                <path
+                  d="M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"
+                />
+                <path
+                  d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233z"
+                />
+                <path d="m8 22 1-4" />
+              </svg>
               Hapus Riwayat
             </button>
           </div>
@@ -636,6 +654,8 @@
       role="dialog"
       aria-modal="true"
       aria-labelledby="modalUnevenTitle"
+      aria-describedby="modalUnevenLead"
+      tabindex="-1"
     >
       <div class="modal-card">
         <div id="modalIconBadge" class="modal-icon-badge" aria-hidden="true">
@@ -666,16 +686,36 @@
       </div>
     </div>
 
-    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+    <div
+      id="toastContainer"
+      class="toast-container"
+      aria-live="polite"
+      aria-atomic="false"
+    ></div>
 
     <footer class="site-footer">
-      <p>
-        <strong>KocokTim</strong> — Pengacakan adil berbasis algoritma
-        Fisher-Yates &amp; tersimpan otomatis di LocalStorage.
-      </p>
-      <p>
-        Dibuat oleh <a href="https://www.naufaladityayahya.com/" target="_blank" rel="me noopener noreferrer">Naufal AY</a> &mdash; <a href="https://www.soudayonee.tech/" target="_blank" rel="me noopener noreferrer">Soudayonee</a>
-      </p>
+      <div class="footer-inner">
+        <p>
+          <strong>KocokTim</strong> — Pengacak kelompok yang praktis, cepat, dan
+          tersimpan otomatis di browser.
+        </p>
+        <nav class="footer-links" aria-label="Tautan pembuat">
+          <span>Dibuat oleh</span>
+          <a
+            href="https://www.naufaladityayahya.com/"
+            target="_blank"
+            rel="me noopener noreferrer"
+            >Naufal AY</a
+          >
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://www.soudayonee.tech/"
+            target="_blank"
+            rel="me noopener noreferrer"
+            >Soudayonee</a
+          >
+        </nav>
+      </div>
     </footer>
 
     <script src="app.js" type="text/javascript"></script>
